@@ -10,6 +10,10 @@ jobs:
   manage:
     name: Manage releases
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      packages: write
     steps:
       - name: Wait for formatting checks
         uses: johannesvedder/await-workflow@v1
