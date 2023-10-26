@@ -11,10 +11,17 @@ jobs:
     name: Manage releases
     runs-on: ubuntu-latest
     steps:
-      - name: Wait for lint workflow
+      - name: Wait for formatting checks
         uses: johannesvedder/await-workflow@v1
         with:
-          workflowId: lint.yml
+          workflowId: check-formatting.yml
+          retryIntervalSeconds: 5
+          initialWaitSeconds: 5
+
+      - name: Wait for linting checks
+        uses: johannesvedder/await-workflow@v1
+        with:
+          workflowId: check-linting.yml
           retryIntervalSeconds: 5
           initialWaitSeconds: 5
 
