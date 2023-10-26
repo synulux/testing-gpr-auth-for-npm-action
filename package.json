@@ -1,0 +1,53 @@
+{
+  "name": "@synulux/testing-gpr-auth-for-npm-action",
+  "version": "0.0.0",
+  "private": true,
+  "description": "This is a testing repository to be deleted. GitHub action to authenticate to GitHub Packages registry (for npm) easily and quick.",
+  "keywords": [
+    "github",
+    "npm",
+    "packages",
+    "action",
+    "synulux"
+  ],
+  "homepage": "https://github.com/synulux/testing-gpr-auth-for-npm-action/",
+  "bugs": "https://github.com/synulux/testing-gpr-auth-for-npm-action/issues/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/synulux/testing-gpr-auth-for-npm-action.git"
+  },
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Sandy Stone"
+  },
+  "type": "module",
+  "main": "./out/index.js",
+  "scripts": {
+    "build": "pnpm run build:delete && tsup",
+    "build:delete": "del-cli ./out/",
+    "build:safe": "pnpm run build:delete && pnpm run format:write && pnpm run lint:check && tsup",
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write .",
+    "lint:check": "tsc",
+    "prepare": "husky install",
+    "release": "pnpm run build:safe && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/changelog-github": "^0.4.8",
+    "@changesets/cli": "^2.26.2",
+    "@swc/core": "^1.3.95",
+    "@types/lint-staged": "^13.2.1",
+    "del-cli": "^5.1.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.2",
+    "lint-staged-tsc": "^0.2.1",
+    "pnpm": "^8.9.2",
+    "prettier": "^3.0.3",
+    "prettier-plugin-packagejson": "^2.4.6",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2"
+  },
+  "engines": {
+    "node": ">=19.2.0"
+  }
+}

@@ -1,0 +1,8 @@
+# Output
+out
+
+# Lockfiles
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+bun.lockb

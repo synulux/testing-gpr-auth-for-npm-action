@@ -1,0 +1,51 @@
+name: Manage releases
+
+on:
+  push:
+    branches: main
+
+concurrency: ${{ github.workflow }} (${{ github.ref }})
+
+jobs:
+  manage:
+    name: Manage releases
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for lint workflow
+        uses: johannesvedder/await-workflow@v1
+        with:
+          workflowId: lint.yml
+          retryIntervalSeconds: 5
+          initialWaitSeconds: 5
+
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm (version 8)
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Setup Node.js (version 20)
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: pnpm
+
+      # - name: Add authentication token
+      #   run: |
+      #     cat << EOF > $HOME/.npmrc
+      #       //npm.pkg.github.com/:_authToken=${{ github.token }}
+      #     EOF
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Create pull request (or release)
+        uses: changesets/action@v1
+        with:
+          publish: pnpm run release
+          commit: New release
+          title: Pending releases
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
