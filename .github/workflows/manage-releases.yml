@@ -56,7 +56,15 @@ jobs:
         uses: changesets/action@v1
         with:
           publish: pnpm run release
-          commit: New release
+          commit: Add new releases
           title: Pending releases
         env:
           GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add .
+          (git commit -m "Build release" && git push) || echo "No changes found, not pushing"
