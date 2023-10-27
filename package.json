@@ -1,6 +1,6 @@
 {
   "name": "@synulux/testing-gpr-auth-for-npm-action",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "description": "This is a testing repository to be deleted. GitHub action to authenticate to GitHub Packages registry (for npm) easily and quick.",
   "keywords": [
